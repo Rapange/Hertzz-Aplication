@@ -2,6 +2,7 @@ package com.Hertzz.servicio;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.Hertzz.dominio.Cancion;
@@ -16,6 +17,13 @@ public class UsuarioServiceImpl implements UsuarioService {
 	UsuarioRepositorio usuarioRepositorio;
 	PlaylistRepositorio playlistRepositorio;
 	CancionRepositorio cancionRepositorio;
+	
+	@Autowired
+	public UsuarioServiceImpl(UsuarioRepositorio ur, PlaylistRepositorio pr, CancionRepositorio cr){
+		this.usuarioRepositorio = ur;
+		this.playlistRepositorio = pr;
+		this.cancionRepositorio = cr;
+	}
 	@Override
 	public boolean crear_playlist(String nombre, Integer usuario_id) {
 		Playlist playlist = usuarioRepositorio.Buscar_Playlist(nombre, usuario_id);
@@ -62,3 +70,4 @@ public class UsuarioServiceImpl implements UsuarioService {
 	}
 
 }
+
