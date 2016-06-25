@@ -8,4 +8,5 @@ public interface UsuarioService {
 	boolean agregar_cancion(Integer cancion_id, Integer playlist_id);
 	boolean seguir_usuario(Integer usuario_id, Integer usuario_id2);
 	boolean stop_seguir(Integer usuario_id, Integer usuario_id2);
+	boolean cerrar_sesion(Integer usuario_id);
 }
