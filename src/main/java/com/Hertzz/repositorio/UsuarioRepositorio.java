@@ -24,7 +24,8 @@ public interface UsuarioRepositorio extends CrudRepository<Usuario, Integer> {
 
 	@Query("SELECT c FROM Cancion AS c WHERE nombre_cancion = :nombre")
 	Cancion Buscar_Cancion(String nombre);
-
+	@Query("SELECT c FROM Playlist AS c WHERE nombre_playlist = :nombre AND usuario_id = :usuario_id")
+	Playlist Buscar_Playlist(String nombre, Integer usuario_id);
 
 
 }
