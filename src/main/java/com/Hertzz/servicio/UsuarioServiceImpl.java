@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.Hertzz.dominio.Cancion;
+import com.Hertzz.dominio.ExUsuario;
 import com.Hertzz.dominio.Playlist;
 import com.Hertzz.dominio.Usuario;
 import com.Hertzz.repositorio.CancionRepositorio;
+import com.Hertzz.repositorio.ExUsuarioRepositorio;
 import com.Hertzz.repositorio.PlaylistRepositorio;
 import com.Hertzz.repositorio.UsuarioRepositorio;
 
@@ -68,6 +70,13 @@ public class UsuarioServiceImpl implements UsuarioService {
 		principal.delete_siguiendo(a_no_seguir);
 		return true;
 	}
+	@Override
+	public boolean cerrar_sesion(Integer usuario_id) {
+		Usuario muerto = usuarioRepositorio.findOne(usuario_id);
+		ExUsuario vivo = (ExUsuario) muerto;
+		usuarioRepositorio.Eliminarse(usuario_id);
+		//ExUsuarioRepositorio.save(vivo);
+		return true;
+	}
 
 }
-
