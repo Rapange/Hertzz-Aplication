@@ -26,28 +26,55 @@ public class Usuario{
 	private String Nombre_completo;
 	private String Correo_electronico;
 	private String Contrasenha;
+	
 	@OneToMany(mappedBy = "playlist_id")
 	private List<Playlist> Playlists;
+	
 	@ManyToMany
 	@JoinTable(name = "Usuario_seguidores",
 		joinColumns = @JoinColumn(name = "Usuario_ID", referencedColumnName = "Usuario_id"),
 		inverseJoinColumns = @JoinColumn(name = "Seguidor_ID", referencedColumnName = "Usuario_id"))
 	private List<Usuario> Seguidores;
+	
 	@ManyToMany
 	@JoinTable(name = "Usuario_siguiendo",
 		joinColumns = @JoinColumn(name = "Usuario_ID", referencedColumnName = "Usuario_id"),
 		inverseJoinColumns = @JoinColumn(name = "Siguiendo_ID", referencedColumnName = "Usuario_id"))
 	public List<Usuario> Siguiendo;
+	
 	@ManyToMany
 	@JoinTable(name = "Usuario_Cancion",
 		joinColumns = @JoinColumn(name = "Usuario_ID", referencedColumnName = "Usuario_id"),
 		inverseJoinColumns = @JoinColumn(name = "Cancion_ID", referencedColumnName = "ID"))
 	private List<Cancion>Historial;
+	
 	public Usuario(){};
 	public Usuario(String Name,String Mail,String Password){
 		Nombre_completo=Name;
 		Correo_electronico=Mail;
 		Contrasenha=Password;
+	}
+	public List<Usuario> get_siguiendo(){
+		return this.Siguiendo;
+	}
+	public List<Usuario> get_seguidores(){
+		return this.Seguidores;
+	}
+	public Usuario buscar(List<Usuario> usuarios, Usuario usuario){
+		for(Usuario i : usuarios){
+			if(i == usuario) return usuario;
+		}
+		return null;
+	}
+	public void delete_siguiendo(Usuario usuario){
+		int index = 0;
+		for(int i = 0; i < Siguiendo.size(); i++){
+			if(Siguiendo.get(i) == usuario) {index = i;}
+		}
+		Siguiendo.remove(index);
+	}
+	public void add_siguiendo(Usuario usuario){
+		Siguiendo.add(usuario);
 	}
 
 }
